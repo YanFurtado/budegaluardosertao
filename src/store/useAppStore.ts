@@ -24,6 +24,7 @@ import type {
   ZonaEntrega,
 } from "@/types";
 import { gerarDadosExemplo } from "@/data/seed";
+import { corrigirTextosV3 } from "@/data/migracoes";
 import { CONSUMIDOR_FINAL } from "@/data/catalogo";
 import { calcularTotaisPedido, type NovoPedidoInput, round2 } from "@/lib/pedidos";
 import { formatCurrency } from "@/lib/format";
@@ -411,7 +412,8 @@ export const useAppStore = create<AppState>()(
     {
       name: "meu-painel:dados",
       // 3: catálogo e dados reais da loja (antes eram pratos de exemplo).
-      version: 3,
+      // 4: correção de português no catálogo (os dados salvos são mantidos, só os textos são corrigidos).
+      version: 4,
       storage: createJSONStorage(() => armazenamentoSeguro, {
         reviver: (_k, v) => (typeof v === "string" && ISO_DATA.test(v) ? new Date(v) : v),
       }),
@@ -421,8 +423,11 @@ export const useAppStore = create<AppState>()(
         for (const [k, v] of Object.entries(s)) if (typeof v !== "function") dados[k] = v;
         return dados as Partial<AppState>;
       },
-      // Mudou a estrutura (versão): começa de novo com os dados de exemplo.
-      migrate: () => ({ ...gerarDadosExemplo(), usuarioLogadoId: null, baseDate: hojeISO() }) as unknown as AppState,
+      // 3 → 4 mantém tudo e só corrige textos; qualquer versão mais antiga começa de novo com os dados de exemplo.
+      migrate: (persistido, versao) =>
+        versao === 3
+          ? (corrigirTextosV3(persistido as Record<string, unknown>) as unknown as AppState)
+          : ({ ...gerarDadosExemplo(), usuarioLogadoId: null, baseDate: hojeISO() } as unknown as AppState),
       merge: (persistido, atual) => {
         const p = persistido as Partial<AppState> | undefined;
         if (!p?.baseDate) return atual;

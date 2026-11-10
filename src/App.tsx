@@ -45,7 +45,12 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* top-center: não cobre o cabeçalho dos painéis laterais (detalhes do pedido etc.) */}
-      <Toaster position="top-center" closeButton toastOptions={{ className: "font-sans" }} />
+      <Toaster
+        position="top-center"
+        closeButton
+        containerAriaLabel="Notificações"
+        toastOptions={{ className: "font-sans", closeButtonAriaLabel: "Fechar aviso" }}
+      />
     </>
   );
 }
