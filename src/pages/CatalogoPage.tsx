@@ -108,7 +108,7 @@ export default function CatalogoPage() {
     const qtd = contagem.get(c.id) ?? 0;
     if (qtd > 0) {
       toast.error(`Não dá para excluir "${c.nome}"`, {
-        description: `Ela tem ${qtd} ${qtd === 1 ? "produto" : "produtos"}. Mova ou exclua os produtos antes.`,
+        description: `Ela tem ${qtd} ${qtd === 1 ? "produto" : "produtos"}. Mova ou exclua ${qtd === 1 ? "o produto" : "os produtos"} antes.`,
       });
       return;
     }
