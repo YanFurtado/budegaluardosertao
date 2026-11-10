@@ -21,6 +21,28 @@ npm run build    # checagem de tipos + build de produção
 Login de demonstração: e-mail de qualquer pessoa da equipe (ex.: `ana@budegaluardosertao.com.br`) e qualquer senha.
 Cada cargo vê só as áreas liberadas em **Administrativo → Equipe**.
 
+## Publicar no Easypanel (Docker)
+
+O projeto já tem `Dockerfile`, `nginx.conf` e `.dockerignore`. A imagem compila o site e o serve com nginx na porta **80**.
+
+1. No Easypanel: **Create Service → App**.
+2. **Source → GitHub**: escolha o repositório `YanFurtado/budegaluardosertao` e o ramo `main`.
+3. **Build → Dockerfile** (caminho `Dockerfile`, na raiz).
+4. **Domains & Proxy**: informe o domínio e a porta **80**.
+5. **Deploy**. A cada novo envio para a `main` dá para refazer o deploy (ou ligar o deploy automático).
+
+Teste local (precisa do Docker instalado):
+
+```bash
+docker build -t budega .
+docker run --rm -p 8080:80 budega   # http://localhost:8080
+```
+
+Observações:
+- Endereços como `/login` e `/gestao-pedidos` funcionam ao recarregar a página (o nginx devolve o `index.html`).
+- O teste de saúde está em `/healthz`.
+- Quando o Supabase for ligado, as chaves `VITE_*` entram na **compilação**: no Easypanel, cadastre-as como *Build Args*.
+
 ## Módulos
 
 | Página / menu | O que faz |

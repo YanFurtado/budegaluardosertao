@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.gitignore
+*.local
+.env*
+.DS_Store
+
+# Não fazem parte do site publicado
+docs
+scripts
+*.md
+Dockerfile
+.dockerignore
