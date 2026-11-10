@@ -96,7 +96,7 @@ export default function HistoricoPedidosPage() {
       ordenados,
       `pedidos_${format(range.start, "yyyy-MM-dd")}_a_${format(range.end, "yyyy-MM-dd")}.csv`,
     );
-    toast.success(`${formatInteger(ordenados.length)} pedidos exportados`);
+    toast.success(`${formatInteger(ordenados.length)} ${ordenados.length === 1 ? "pedido exportado" : "pedidos exportados"}`);
   };
 
   return (

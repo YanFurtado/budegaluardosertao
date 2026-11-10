@@ -18,7 +18,7 @@ function modelos(nome: string, nota: number) {
   const primeiro = nome.split(" ")[0];
   return nota >= 4
     ? [
-        { label: "Agradecer", texto: `Muito obrigado, ${primeiro}! Ficamos felizes que gostou. Volte sempre!` },
+        { label: "Agradecer", texto: `Muito obrigado, ${primeiro}! Ficamos felizes que tenha gostado. Volte sempre!` },
         { label: "Convidar de novo", texto: `Que bom ter você com a gente, ${primeiro}! Esperamos seu próximo pedido.` },
       ]
     : [

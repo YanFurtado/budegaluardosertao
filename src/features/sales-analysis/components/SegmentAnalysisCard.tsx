@@ -166,7 +166,8 @@ function PieTooltip({ active, payload }: TooltipProps<number, string>) {
         {row.segment}
       </p>
       <p className="tabular-nums text-ink-muted">
-        {formatCurrency(row.faturamento)} · {formatPercent(row.share, 1)} · {formatInteger(row.pedidos)} pedidos
+        {formatCurrency(row.faturamento)} · {formatPercent(row.share, 1)} · {formatInteger(row.pedidos)}{" "}
+        {row.pedidos === 1 ? "pedido" : "pedidos"}
       </p>
     </div>
   );

@@ -363,7 +363,7 @@ export function gerarDadosExemplo(agora = new Date(), total = TOTAL_PEDIDOS_EXEM
       criado_em: em,
       resposta: responde
         ? nota >= 4
-          ? `Muito obrigado, ${primeiroNome}! Ficamos felizes que gostou. Volte sempre!`
+          ? `Muito obrigado, ${primeiroNome}! Ficamos felizes que tenha gostado. Volte sempre!`
           : `Oi, ${primeiroNome}. Sentimos muito pela experiência. Já conversamos com a equipe para melhorar. Conte com a gente!`
         : null,
       respondido_em: responde ? addMinutes(em, inteiro(30, 600)) : null,

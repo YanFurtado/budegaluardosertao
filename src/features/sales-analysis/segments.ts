@@ -32,7 +32,7 @@ export const SEGMENT_GROUPS: { value: SegmentGroup; label: string; column: strin
     column: "Momento da entrega",
     segments: MOMENTOS_ENTREGA.map((m) => m.label),
   },
-  { value: "canal_venda", label: "canal de vendas", column: "Canal de vendas", segments: CANAIS_VENDA },
+  { value: "canal_venda", label: "canal de venda", column: "Canal de venda", segments: CANAIS_VENDA },
   { value: "origem", label: "origem do pedido", column: "Origem do pedido", segments: ORIGENS },
   {
     value: "responsavel_entrega",

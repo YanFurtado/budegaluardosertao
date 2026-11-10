@@ -25,6 +25,69 @@ const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().rep
 const slug = (s) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const limpar = (s) => String(s ?? "").replace(/\s+/g, " ").replace(/\s+,/g, ",").trim();
 
+/* ---------------- Correção de português ----------------
+ * Nomes e descrições foram copiados de uma plataforma de cardápio de terceiros e trazem erros reais
+ * de digitação. A correção mora aqui (o JSON gerado não deve ser editado à mão), então continua
+ * valendo se a extração for refeita. Ela roda depois de `limpar`, em nomes, descrições e categorias.
+ */
+
+/* 1) Palavras escritas errado (comparação sem diferenciar maiúsculas; a inicial maiúscula é mantida). */
+const PALAVRAS_ERRADAS = {
+  caico: "Caicó",
+  linguica: "linguiça",
+  suina: "suína",
+  maracuja: "maracujá",
+  mantiega: "manteiga",
+};
+
+/* 2) Regras gerais de pontuação e formatação. */
+const REGRAS_GERAIS = [
+  [/(\p{L})\(/gu, "$1 ("], // "Ricota(frescal)" -> "Ricota (frescal)"
+  [/(\p{L}{2,})\/ (?=\p{Lu}{2}(?!\p{L}))/gu, "$1/"], // "Casa Nova/ BA" -> "Casa Nova/BA" (cidade/UF; "c/ queijo" fica como está)
+  [/(\d)\.(\d+)(?=\s?kg\b)/gi, "$1,$2"], // "1.3kg" -> "1,3kg" (separador decimal)
+  [/“\s*([^“”]*?)\s*[“”]/g, "“$1”"], // aspas abrindo duas vezes e com espaço por dentro
+  [/([!?])\s*,\s*(\p{L})/gu, (_, p, l) => `${p} ${l.toUpperCase()}`], // "Brasil!, esse" -> "Brasil! Esse"
+];
+
+/* 3) Trocas pontuais. Chave = id do produto no HTML antigo; n = nome, d = descrição; cada troca é
+ *    [trecho errado, trecho certo]. Se o trecho errado não existir mais, o script avisa (erro). */
+const TROCAS_POR_PRODUTO = {
+  3172003: { d: [["esse delício!", "essa delícia!"]] }, // Queijo Coalho Bom de Assar e Pouco Sal 600g
+  3172037: { d: [["no agreste pernambucano", "no Agreste pernambucano"]] }, // Queijo Coalho Furadinho 600g
+  1810766: { d: [["Caico\\ RN", "Caicó/RN"]] }, // Manteiga Artesanal Pura feita da Nata 500 ML
+  4625821: { d: [["Caico\\ RN", "Caicó/RN"]] }, // Mini kit 4 Queijos Provolone de Minas (descrição é de outro produto)
+  5399459: { n: [["Ovos Caipira", "Ovos Caipiras"]] }, // Ovos Caipira Bandeja com 30 Ovos
+  1816757: { n: [["Ovos Caipira", "Ovos Caipiras"]] }, // Ovos Caipira Dúzia
+  1810784: { n: [["Ricota(frescal)", "Ricota (Frescal)"]] }, // Queijo Ricota(frescal) Fresca de Minas 500g
+  1765773: { n: [["Puba(barra branca)", "Puba (Barra Branca)"]] }, // Bolo de Puba(barra branca) Redondo
+  2910321: { d: [["Premiado Da microrregião", "Premiado da microrregião"]] }, // Nozinho de Búfala
+  1765792: { d: [["Carne Macia,", "Carne macia,"]] }, // Carne de Sol 500g
+  2336479: { d: [["peso 400g", "Peso 400g"]] }, // Mini Bolo de Rolo Recife original 190g
+};
+
+/* 4) Trocas nos nomes das categorias. */
+const TROCAS_CATEGORIA = [["Galinha, linguiça,", "Galinha, Linguiça,"]];
+
+const casarMaiuscula = (errada, certa) => {
+  if (errada.length > 1 && errada === errada.toUpperCase()) return certa.toUpperCase();
+  if (errada[0] !== errada[0].toLowerCase()) return certa[0].toUpperCase() + certa.slice(1);
+  return certa;
+};
+
+const corrigirTexto = (texto, trocas = [], onde = "") => {
+  let t = texto;
+  for (const [de, para] of trocas) {
+    if (!t.includes(de)) throw new Error(`Correção de português: "${de}" não foi encontrado em ${onde || texto}.`);
+    t = t.split(de).join(para);
+  }
+  t = t.replace(/(?<![\p{L}])\p{L}+(?![\p{L}])/gu, (w) => {
+    const certa = PALAVRAS_ERRADAS[w.toLowerCase()];
+    return certa ? casarMaiuscula(w, certa) : w;
+  });
+  for (const [regra, novo] of REGRAS_GERAIS) t = t.replace(regra, novo);
+  return t;
+};
+
 const [maisVendidos, ...cats] = DATA.cats;
 if (norm(maisVendidos.name) !== "mais vendidos") throw new Error("A primeira categoria deveria ser 'Mais Vendidos'.");
 
@@ -59,7 +122,11 @@ const CATEGORIA_DOS_MAIS_VENDIDOS = {
 };
 
 /* ---------------- Categorias ---------------- */
-const categorias = cats.map((c, i) => ({ id: `cat-${slug(c.name)}`, nome: limpar(c.name), ordem: i + 1 }));
+const categorias = cats.map((c, i) => ({
+  id: `cat-${slug(c.name)}`, // o id sai do nome original, para não mudar quando o texto for corrigido
+  nome: corrigirTexto(limpar(c.name), TROCAS_CATEGORIA.filter(([de]) => limpar(c.name).includes(de)), `a categoria "${c.name}"`),
+  ordem: i + 1,
+}));
 const idCategoria = new Map(cats.map((c, i) => [norm(c.name), categorias[i].id]));
 
 /* ---------------- Produtos (sem repetidos) ---------------- */
@@ -69,8 +136,8 @@ const relatorio = { repetidos: [], soMaisVendidos: [], copias: [] };
 const novoProduto = (item, categoria_id, destaque) => ({
   id: `prod-${item.id}`,
   categoria_id,
-  nome: limpar(item.n),
-  descricao: limpar(item.d),
+  nome: corrigirTexto(limpar(item.n), TROCAS_POR_PRODUTO[item.id]?.n, `o nome do produto ${item.id}`),
+  descricao: corrigirTexto(limpar(item.d), TROCAS_POR_PRODUTO[item.id]?.d, `a descrição do produto ${item.id}`),
   preco: item.p,
   preco_promocional: item.pp ?? null,
   ativo: !item.out,
@@ -145,7 +212,7 @@ const rodapeCnpj = /CNPJ\s*([\d./-]+)/.exec(linhas.join("\n"))?.[1] ?? "";
 const loja = {
   nome: "Budega Luar do Sertão",
   site: "",
-  descricao: limpar(s.description),
+  descricao: corrigirTexto(limpar(s.description)),
   cnpj: rodapeCnpj,
   telefone,
   whatsapp: telefone,

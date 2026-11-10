@@ -158,7 +158,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
                   {contador > 0 && (
                     <span
                       className="min-w-5 rounded-full bg-accent px-1.5 py-0.5 text-center text-[11px] font-bold leading-none text-ink"
-                      aria-label={`${contador} pedidos em análise`}
+                      aria-label={`${contador} ${contador === 1 ? "pedido" : "pedidos"} em análise`}
                     >
                       {contador}
                     </span>

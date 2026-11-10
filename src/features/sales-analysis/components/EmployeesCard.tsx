@@ -14,7 +14,7 @@ export function EmployeesCard({ loading, rows }: { loading: boolean; rows: Emplo
     <section className="card p-4 sm:p-5">
       <CardHeader
         title="Pedidos por funcionário (Delivery/Retirada/No local)"
-        subtitle="O valor do faturamento inclui todas as taxas e descontos. O pedido é atribuído ao funcionário que fez ou aceitou ele."
+        subtitle="O valor do faturamento inclui todas as taxas e descontos. O pedido é atribuído ao funcionário que o fez ou aceitou."
       />
       <DataTable
         columns={columns}

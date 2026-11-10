@@ -101,7 +101,7 @@ export function Topbar({ title, onOpenMenu }: { title: string; onOpenMenu: () =>
             <button
               type="button"
               className={cn(iconBtn, "relative")}
-              aria-label={naoLidas ? `Notificações (${naoLidas} não lidas)` : "Notificações"}
+              aria-label={naoLidas ? `Notificações (${naoLidas} ${naoLidas === 1 ? "não lida" : "não lidas"})` : "Notificações"}
               title="Notificações"
             >
               <Bell className="size-5" />

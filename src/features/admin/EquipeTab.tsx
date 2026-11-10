@@ -41,6 +41,7 @@ export function EquipeTab() {
         : null;
 
   const linhas = funcionarios.filter((f) => contem(f.nome, busca) || contem(f.email, busca));
+  const qtdAtivos = funcionarios.filter((f) => f.ativo).length;
   const total = PERMISSOES.length;
 
   const columns: Column<Funcionario>[] = [
@@ -118,7 +119,7 @@ export function EquipeTab() {
         <div>
           <h2 className="card-title">Equipe</h2>
           <p className="card-subtitle">
-            {funcionarios.filter((f) => f.ativo).length} ativos de {funcionarios.length}. Cada pessoa só vê as áreas permitidas.
+            {qtdAtivos} {qtdAtivos === 1 ? "ativo" : "ativos"} de {funcionarios.length}. Cada pessoa só vê as áreas permitidas.
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">

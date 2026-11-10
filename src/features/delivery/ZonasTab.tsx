@@ -95,7 +95,8 @@ export function ZonasTab() {
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-ink-muted">
-          {zonas.filter((z) => z.ativa).length} de {zonas.length} bairros atendidos. A taxa é somada ao pedido de delivery.
+          {zonas.filter((z) => z.ativa).length} de {zonas.length} {zonas.length === 1 ? "bairro atendido" : "bairros atendidos"}. A taxa é
+          somada ao pedido de delivery.
         </p>
         <Button onClick={() => abrir(null)}>
           <Plus /> Nova área
