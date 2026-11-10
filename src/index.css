@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-page font-sans text-[13px] leading-5 text-ink antialiased;
+    /* Números com largura fixa em todo o sistema: os valores em reais alinham nas colunas das tabelas. */
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Remove setas dos inputs numéricos */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-white shadow-card;
+  }
+  .card-title {
+    @apply text-[15px] font-semibold text-ink;
+  }
+  .card-subtitle {
+    @apply text-[13px] text-ink-muted;
+  }
+  .input {
+    @apply h-9 rounded-md border border-line bg-white px-3 text-[13px] text-ink outline-none transition-colors placeholder:text-ink-muted/70 focus:border-chart-primary focus:ring-2 focus:ring-chart-primary/20;
+  }
+}
+
+/* Recharts: sem contorno de foco preto no SVG */
+.recharts-wrapper :focus,
+.recharts-surface:focus {
+  outline: none;
+}
