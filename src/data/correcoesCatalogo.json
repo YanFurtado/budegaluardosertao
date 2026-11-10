@@ -1,0 +1,170 @@
+[
+  {
+    "tipo": "produto",
+    "id": "prod-3172003",
+    "campo": "descricao",
+    "de": "Saboroso Queijo Artesanal com baixo teor de sal, perfeito para assar e realçar suas receitas. Desperte seu paladar com uma textura cremosa e um aroma irresistível. Transforme seus pratos com esse delício! Preço do kg: R$ 36,00",
+    "para": "Saboroso Queijo Artesanal com baixo teor de sal, perfeito para assar e realçar suas receitas. Desperte seu paladar com uma textura cremosa e um aroma irresistível. Transforme seus pratos com essa delícia! Preço do kg: R$ 36,00"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3172005",
+    "campo": "nome",
+    "de": "Queijo Manteiga Artesanal de caico 600g",
+    "para": "Queijo Manteiga Artesanal de Caicó 600g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-5476599",
+    "campo": "nome",
+    "de": "Raspa de Tacho de caico 600g",
+    "para": "Raspa de Tacho de Caicó 600g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3172037",
+    "campo": "descricao",
+    "de": "Descubra o sabor único do nosso queijo coalho furadinho artesanal, produzido com carinho no agreste pernambucano. Uma explosão de textura e tradição que transforma suas refeições em momentos especiais. Experimente essa delícia!",
+    "para": "Descubra o sabor único do nosso queijo coalho furadinho artesanal, produzido com carinho no Agreste pernambucano. Uma explosão de textura e tradição que transforma suas refeições em momentos especiais. Experimente essa delícia!"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3638808",
+    "campo": "nome",
+    "de": "Galinha Caipira/capoeira Aproximadamente 1.3kg",
+    "para": "Galinha Caipira/capoeira Aproximadamente 1,3kg"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3638808",
+    "campo": "descricao",
+    "de": "Galinha Caipira Cortada e Completa. Aproximadamente: 1.100kg",
+    "para": "Galinha Caipira Cortada e Completa. Aproximadamente: 1,100kg"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1810766",
+    "campo": "descricao",
+    "de": "Mantiega Pura de Caico\\ RN",
+    "para": "Manteiga Pura de Caicó/RN"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-4625821",
+    "campo": "descricao",
+    "de": "Mantiega Pura de Caico\\ RN",
+    "para": "Manteiga Pura de Caicó/RN"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-5399459",
+    "campo": "nome",
+    "de": "Ovos Caipira Bandeja com 30 Ovos",
+    "para": "Ovos Caipiras Bandeja com 30 Ovos"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1816757",
+    "campo": "nome",
+    "de": "Ovos Caipira Dúzia",
+    "para": "Ovos Caipiras Dúzia"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-5013607",
+    "campo": "nome",
+    "de": "Linguica Carne de Sol com Queijo 500g",
+    "para": "Linguiça Carne de Sol com Queijo 500g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1810784",
+    "campo": "nome",
+    "de": "Queijo Ricota(frescal) Fresca de Minas 500g",
+    "para": "Queijo Ricota (Frescal) Fresca de Minas 500g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-2910321",
+    "campo": "descricao",
+    "de": "Queijo Minas Artesanal Premiado Da microrregião da Canastra",
+    "para": "Queijo Minas Artesanal Premiado da microrregião da Canastra"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3172347",
+    "campo": "descricao",
+    "de": "Descubra o autêntico queijo Canastra, um tesouro artesanal do Brasil!, esse saboroso queijo é feito com leite cru de vacas que pastam livremente na Serra da Canastra, em Minas Gerais. Peso: 600g de pura delícia!",
+    "para": "Descubra o autêntico queijo Canastra, um tesouro artesanal do Brasil! Esse saboroso queijo é feito com leite cru de vacas que pastam livremente na Serra da Canastra, em Minas Gerais. Peso: 600g de pura delícia!"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-5093478",
+    "campo": "descricao",
+    "de": "Descubra o autêntico queijo Canastra, um tesouro artesanal do Brasil!, esse saboroso queijo é feito com leite cru de vacas que pastam livremente na Serra da Canastra, em Minas Gerais. Peso: 600g de pura delícia!",
+    "para": "Descubra o autêntico queijo Canastra, um tesouro artesanal do Brasil! Esse saboroso queijo é feito com leite cru de vacas que pastam livremente na Serra da Canastra, em Minas Gerais. Peso: 600g de pura delícia!"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-3033125",
+    "campo": "nome",
+    "de": "Doce Tropical de Leite com Maracuja 400g",
+    "para": "Doce Tropical de Leite com Maracujá 400g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1816660",
+    "campo": "nome",
+    "de": "Leite 2L “ Apenas por reserva “",
+    "para": "Leite 2L “Apenas por reserva”"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765872",
+    "campo": "nome",
+    "de": "Peta de Casa Nova/ BA",
+    "para": "Peta de Casa Nova/BA"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-2336479",
+    "campo": "descricao",
+    "de": "peso 400g",
+    "para": "Peso 400g"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765773",
+    "campo": "nome",
+    "de": "Bolo de Puba(barra branca) Redondo",
+    "para": "Bolo de Puba (Barra Branca) Redondo"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765787",
+    "campo": "nome",
+    "de": "Galinha Caipira Aproximadamente 1.3kg",
+    "para": "Galinha Caipira Aproximadamente 1,3kg"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765787",
+    "campo": "descricao",
+    "de": "Galinha Caipira Cortada e Completa. Aproximadamente: 1.100kg",
+    "para": "Galinha Caipira Cortada e Completa. Aproximadamente: 1,100kg"
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765792",
+    "campo": "descricao",
+    "de": "Carne Macia, coxão mole, sal no ponto.",
+    "para": "Carne macia, coxão mole, sal no ponto."
+  },
+  {
+    "tipo": "produto",
+    "id": "prod-1765789",
+    "campo": "nome",
+    "de": "Linguiça Caseira Suina 500g",
+    "para": "Linguiça Caseira Suína 500g"
+  }
+]

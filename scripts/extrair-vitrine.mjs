@@ -4,6 +4,9 @@
  *   - public/logo-budega.webp       (logo)
  *   - src/data/lojaReal.json        (loja, categorias e produtos, sem imagens embutidas)
  *
+ * Os textos copiados da plataforma antiga passam por uma etapa de correção de português
+ * (seção "Correção de português" abaixo); para corrigir outro texto, acrescente-o lá e rode de novo.
+ *
  * Uso: node scripts/extrair-vitrine.mjs [caminho-do-html]
  */
 import fs from "node:fs";
@@ -32,13 +35,15 @@ const limpar = (s) => String(s ?? "").replace(/\s+/g, " ").replace(/\s+,/g, ",")
  */
 
 /* 1) Palavras escritas errado (comparação sem diferenciar maiúsculas; a inicial maiúscula é mantida). */
-const PALAVRAS_ERRADAS = {
-  caico: "Caicó",
-  linguica: "linguiça",
-  suina: "suína",
-  maracuja: "maracujá",
-  mantiega: "manteiga",
-};
+const PALAVRAS_ERRADAS = new Map(
+  Object.entries({
+    caico: "Caicó",
+    linguica: "linguiça",
+    suina: "suína",
+    maracuja: "maracujá",
+    mantiega: "manteiga",
+  }),
+);
 
 /* 2) Regras gerais de pontuação e formatação. */
 const REGRAS_GERAIS = [
@@ -65,9 +70,6 @@ const TROCAS_POR_PRODUTO = {
   2336479: { d: [["peso 400g", "Peso 400g"]] }, // Mini Bolo de Rolo Recife original 190g
 };
 
-/* 4) Trocas nos nomes das categorias. */
-const TROCAS_CATEGORIA = [["Galinha, linguiça,", "Galinha, Linguiça,"]];
-
 const casarMaiuscula = (errada, certa) => {
   if (errada.length > 1 && errada === errada.toUpperCase()) return certa.toUpperCase();
   if (errada[0] !== errada[0].toLowerCase()) return certa[0].toUpperCase() + certa.slice(1);
@@ -81,7 +83,7 @@ const corrigirTexto = (texto, trocas = [], onde = "") => {
     t = t.split(de).join(para);
   }
   t = t.replace(/(?<![\p{L}])\p{L}+(?![\p{L}])/gu, (w) => {
-    const certa = PALAVRAS_ERRADAS[w.toLowerCase()];
+    const certa = PALAVRAS_ERRADAS.get(w.toLowerCase());
     return certa ? casarMaiuscula(w, certa) : w;
   });
   for (const [regra, novo] of REGRAS_GERAIS) t = t.replace(regra, novo);
@@ -124,7 +126,7 @@ const CATEGORIA_DOS_MAIS_VENDIDOS = {
 /* ---------------- Categorias ---------------- */
 const categorias = cats.map((c, i) => ({
   id: `cat-${slug(c.name)}`, // o id sai do nome original, para não mudar quando o texto for corrigido
-  nome: corrigirTexto(limpar(c.name), TROCAS_CATEGORIA.filter(([de]) => limpar(c.name).includes(de)), `a categoria "${c.name}"`),
+  nome: corrigirTexto(limpar(c.name)),
   ordem: i + 1,
 }));
 const idCategoria = new Map(cats.map((c, i) => [norm(c.name), categorias[i].id]));
